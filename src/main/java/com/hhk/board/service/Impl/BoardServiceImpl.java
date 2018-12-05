@@ -1,5 +1,6 @@
 package com.hhk.board.service.Impl;
 
+import com.hhk.board.Controller.MainController;
 import com.hhk.board.repository.BoardRepository;
 import com.hhk.board.service.BoardService;
 import com.hhk.board.domain.BoardVO;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 
 import java.util.List;
+
 
 @Slf4j
 @Service
@@ -31,9 +33,18 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public void Write(BoardVO board){
+    public boolean Write(BoardVO board){
+       String title = board.getTitle();
+       String content = board.getContent();
+       String writer = board.getWriter();
 
-       boardRepository.Write(board);
+       if(title.length()==0 || content.length()==0 || writer.length()==0 || title.equals("")){
+           return true;
+       }else {
+           boardRepository.Write(board);
+           return false;
+
+       }
     }
 
     @Override
@@ -47,4 +58,17 @@ public class BoardServiceImpl implements BoardService {
 
         boardRepository.Delete(bno);
     }
+
+
+    public void Write(boolean empty){
+
+        if(empty) {
+
+        }
+        else{
+
+        }
+    }
+
+
 }
