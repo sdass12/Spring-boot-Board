@@ -16,16 +16,10 @@
                     alert('제목을 입력해주세요.');
                     return false;
                 }
-                if(writer.value=='' || writer.value == null){
-                    alert('작성자를 입력해주세요.');
-                    return false;
-                }
                 if(content.value=='' || content.value == null){
                     alert('내용을 입력해주세요.');
                     return false;
                 }
-
-                location.href="";
           }
     </script>
 </head>
@@ -49,7 +43,7 @@
                 <td width="450"><input type="password" size="50" name="password"></td>
                 <td>
 
-                    <input type="submit" value="수정">
+                    <input type="submit" value="수정" onClick="check()">
                     <input type="button" value="취소" onClick="history.back()">
                 </td>
             </tr>

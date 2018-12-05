@@ -38,7 +38,7 @@ public class BoardServiceImpl implements BoardService {
        String content = board.getContent();
        String writer = board.getWriter();
 
-       if(title.length()==0 || content.length()==0 || writer.length()==0 || title.equals("")){
+       if(title.length()==0 || content.length()==0 || writer.length()==0 ){
            return true;
        }else {
            boardRepository.Write(board);
@@ -48,26 +48,23 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public void Update(BoardVO board){
+    public boolean Update(BoardVO board){
 
-        boardRepository.Update(board);
+        String title= board.getTitle();
+        String content = board.getContent();
+        if(title.length()==0 || content.length()==0){
+            return true;
+        }else{
+            boardRepository.Update(board);
+            return false;
+        }
+
     }
 
     @Override
     public void Delete(int bno){
 
         boardRepository.Delete(bno);
-    }
-
-
-    public void Write(boolean empty){
-
-        if(empty) {
-
-        }
-        else{
-
-        }
     }
 
 

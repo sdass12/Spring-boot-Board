@@ -54,9 +54,14 @@ public class MainController{
     @PostMapping("/update/{bno}")
     public String update_ok(BoardVO board) throws Exception{
         logger.info("PUT data : " + board.toString());
-         boardService.Update(board);
+         boolean emptyCheck = boardService.Update(board);
 
-        return "redirect://localhost:8080/board";
+         if(emptyCheck){
+             return null;
+         }else{
+             return "redirect://localhost:8080/board";
+         }
+
     }
 
     // 글 상세보기
