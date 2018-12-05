@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>게시판</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+
+    <script type="text/javascript">
+          function check(){
+                var title = document.getElementById('title');
+                var writer = document.getElementById('writer');
+                var content = document.getElementById('content');
+
+
+                if(title.value=='' || title.value == null){
+                    alert('제목을 입력해주세요.');
+                    return false;
+                }
+                if(writer.value=='' || writer.value == null){
+                    alert('작성자를 입력해주세요.');
+                    return false;
+                }
+                if(content.value=='' || content.value == null){
+                    alert('내용을 입력해주세요.');
+                    return false;
+                }
+
+                location.href="";
+          }
+    </script>
+</head>
+<body>
+<div>
+    <form th:action="'/update/'+${board.bno}" method="POST">
+        <table border="1" align="center">
+            <tr>
+                <td>제목</td>
+                <td width="600" colspan="2"><input type="text" size="70" name="title" id="title" th:value="${board.title}"></td>
+            </tr>
+            <tr>
+                <td>이름</td>
+                <td width="600" colspan="2" th:text="${board.writer}">...</td>
+            </tr>
+            <tr>
+                <td colspan="3"><textarea rows="30" cols="100" name="content" id="content" th:text="${board.content}">...</textarea></td>
+            </tr>
+            <tr>
+                <td>비밀번호</td>
+                <td width="450"><input type="password" size="50" name="password"></td>
+                <td>
+
+                    <input type="submit" value="수정">
+                    <input type="button" value="취소" onClick="history.back()">
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+</body>
+</html>

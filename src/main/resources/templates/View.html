@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>게시판</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+</head>
+<body>
+    <div>
+        <table border="1" align="center">
+            <tr>
+                <td width="60">제목</td>
+                <td th:text="${board.title}" width="500" colspan="3">...</td>
+            </tr>
+            <tr>
+                <td width="60">작성자</td>
+                <td width="200" th:text="${board.writer}">...</td>
+                <td width="60">글번호</td>
+                <td width="180" th:text="${board.bno}">...</td>
+            </tr>
+            <tr>
+                <td width="560" height="600" colspan="4" th:text="${board.content}" >...</td>
+            </tr>
+            <tr>
+                <form th:action="'/delete/'+${bno}" method="POST">
+                    <td colspan="2"><input type="submit" value="삭제"></td>
+                </form>
+                <form th:action="'/update/'+${bno}" method="GET">
+                <td colspan="2"><input type="submit" value="수정"></td>
+                </form>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

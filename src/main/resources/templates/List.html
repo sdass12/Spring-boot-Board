@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>게시판</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+</head>
+<body>
+    <div>
+        <table border="1" align="center">
+                <tr>
+                    <td width="50" >Num</td>
+                    <td width="600">Title</td>
+                    <td width="100">Writer</td>
+                    <td width="150">Date</td>
+                </tr>
+                <tr th:each ="board : ${resultList}">
+                    <td th:text="${board.bno}">...</td>
+                    <td><a th:href="'/view/'+${board.bno}" th:text="${board.title}" style="text-decoration:none;color:black">...</a></td>
+                    <td th:utext="${board.writer}">...</td>
+                    <td th:utext="${board.date}">...</td>
+                </tr>
+        </table>
+    </div>
+    <div>
+        <input type="button" value="글 쓰기" onClick="location.href='write'" align="right">
+    </div>
+</body>
+</html>
