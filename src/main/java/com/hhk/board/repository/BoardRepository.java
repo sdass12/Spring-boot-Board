@@ -20,6 +20,9 @@ public interface BoardRepository {
     @Select("SELECT COUNT(*) FROM board")
     int boardTotal();
 
+    @Select("SELECT password FROM board WHERE bno=#{bno}")
+    String getPW(@Param("bno") int bno);
+
     @Insert("INSERT " +
             "INTO " +
             "board " +

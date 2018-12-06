@@ -1,6 +1,6 @@
 package com.hhk.board.service.Impl;
 
-import com.hhk.board.Controller.MainController;
+
 import com.hhk.board.repository.BoardRepository;
 import com.hhk.board.service.BoardService;
 import com.hhk.board.domain.BoardVO;
@@ -56,6 +56,13 @@ public class BoardServiceImpl implements BoardService {
     public void Delete(int bno){
 
         boardRepository.Delete(bno);
+    }
+
+    @Override
+    public String getPW(int bno){
+
+        String PW = boardRepository.getPW(bno);
+        return PW;
     }
 
 

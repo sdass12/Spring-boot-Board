@@ -12,5 +12,6 @@ public interface BoardService {
     public void Write(BoardVO board); //글 쓰기
     public void Update(BoardVO board); //글 수정
     public void Delete(int bno); //글 삭제
+    public String getPW(int bno);
 
 }
