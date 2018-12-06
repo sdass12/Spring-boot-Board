@@ -23,9 +23,12 @@ public class MainController{
     // 글 리스트
     @GetMapping(value = {"/board","/"})
     public ModelAndView list() throws Exception{
+        int total = boardService.boardTotal();
         List<BoardVO> boardList = boardService.List();
         ModelAndView List = new ModelAndView("List");
         List.addObject("resultList", boardList);
+        List.addObject("total",total);
+
         return List;
     }
 

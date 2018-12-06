@@ -17,6 +17,9 @@ public interface BoardRepository {
     @Select("SELECT * FROM board WHERE bno=#{bno}")
     BoardVO View(@Param("bno") int bno);
 
+    @Select("SELECT COUNT(*) FROM board")
+    int boardTotal();
+
     @Insert("INSERT " +
             "INTO " +
             "board " +

@@ -6,6 +6,7 @@ import lombok.Data;
 public class BoardVO {
 
     private int bno;
+    private int total;
     private String title;
     private String content;
     private String date;
@@ -19,6 +20,14 @@ public class BoardVO {
 
     public void setBno(int bno){
         this.bno=bno;
+    }
+
+    public int getTotal(){
+        return total;
+    }
+
+    public void setTotal(int total){
+        this.total=total;
     }
 
     public String getTitle(){

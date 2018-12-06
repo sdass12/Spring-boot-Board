@@ -7,6 +7,7 @@ import com.hhk.board.domain.BoardVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.ModelAndView;
 
 
 import java.util.List;
@@ -24,6 +25,12 @@ public class BoardServiceImpl implements BoardService {
     public List<BoardVO> List(){
 
        return boardRepository.List();
+    }
+
+    @Override
+    public int boardTotal(){
+
+        return boardRepository.boardTotal();
     }
 
     @Override
@@ -50,6 +57,7 @@ public class BoardServiceImpl implements BoardService {
 
         boardRepository.Delete(bno);
     }
+
 
 
 }
