@@ -33,32 +33,16 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public boolean Write(BoardVO board){
-       String title = board.getTitle();
-       String content = board.getContent();
-       String writer = board.getWriter();
+    public void Write(BoardVO board){
 
-       if(title.length()==0 || content.length()==0 || writer.length()==0 ){
-           return true;
-       }else {
-           boardRepository.Write(board);
-           return false;
+        boardRepository.Write(board);
 
-       }
     }
 
     @Override
-    public boolean Update(BoardVO board){
+    public void Update(BoardVO board){
 
-        String title= board.getTitle();
-        String content = board.getContent();
-        if(title.length()==0 || content.length()==0){
-            return true;
-        }else{
             boardRepository.Update(board);
-            return false;
-        }
-
     }
 
     @Override

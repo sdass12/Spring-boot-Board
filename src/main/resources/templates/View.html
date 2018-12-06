@@ -19,15 +19,16 @@
                 <td width="180" th:text="${board.bno}">...</td>
             </tr>
             <tr>
-                <td width="560" height="600" colspan="4" th:text="${board.content}" >...</td>
+                <td width="560" height="600" colspan="4" th:utext="${board.content}">...</td>
             </tr>
             <tr>
                 <form th:action="'/delete/'+${bno}" method="POST">
-                    <td colspan="2"><input type="submit" value="삭제"></td>
+                    <td width="187"><input type="submit" value="삭제"></td>
                 </form>
                 <form th:action="'/update/'+${bno}" method="GET">
-                <td colspan="2"><input type="submit" value="수정"></td>
+                <td width="186"><input type="submit" value="수정"></td>
                 </form>
+                <td width="187" colspan="2"><input type="button" value="목록" onClick="history.back()"></td>
             </tr>
         </table>
     </div>

@@ -20,10 +20,11 @@
                     <td th:utext="${board.writer}">...</td>
                     <td th:utext="${board.date}">...</td>
                 </tr>
+                <tr>
+                    <td colspan="4"><input type="button" value="글 쓰기" onClick="location.href='write'" align="right"></td>
+                </tr>
         </table>
     </div>
-    <div>
-        <input type="button" value="글 쓰기" onClick="location.href='write'" align="right">
-    </div>
+
 </body>
 </html>

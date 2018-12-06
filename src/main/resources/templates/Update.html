@@ -7,6 +7,8 @@
 
     <script type="text/javascript">
           function check(){
+                var form = document.Update;
+
                 var title = document.getElementById('title');
                 var writer = document.getElementById('writer');
                 var content = document.getElementById('content');
@@ -14,18 +16,21 @@
 
                 if(title.value=='' || title.value == null){
                     alert('제목을 입력해주세요.');
-                    return false;
+                    form.title.focus();
+                    return;
                 }
                 if(content.value=='' || content.value == null){
                     alert('내용을 입력해주세요.');
-                    return false;
+                    form.content.focus();
+                    return;
                 }
+                form.submit();
           }
     </script>
 </head>
 <body>
 <div>
-    <form th:action="'/update/'+${board.bno}" method="POST">
+    <form th:action="'/update/'+${board.bno}" method="POST" name="Update">
         <table border="1" align="center">
             <tr>
                 <td>제목</td>
@@ -43,7 +48,7 @@
                 <td width="450"><input type="password" size="50" name="password"></td>
                 <td>
 
-                    <input type="submit" value="수정" onClick="check()">
+                    <input type="button" value="수정" onClick="check()">
                     <input type="button" value="취소" onClick="history.back()">
                 </td>
             </tr>

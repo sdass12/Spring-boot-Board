@@ -33,13 +33,10 @@ public class MainController{
     @PostMapping("/write")
     public String insert(BoardVO board) throws Exception{
         logger.info("POST /board : " + board.toString());
-        boolean emptyCheck = boardService.Write(board);
+        boardService.Write(board);
 
-        if(emptyCheck){
-            return null;
-        }else {
             return "redirect://localhost:8080/board";
-        }
+
     }
 
     // 글 수정
@@ -54,14 +51,10 @@ public class MainController{
     @PostMapping("/update/{bno}")
     public String update_ok(BoardVO board) throws Exception{
         logger.info("PUT data : " + board.toString());
-         boolean emptyCheck = boardService.Update(board);
 
-         if(emptyCheck){
-             return null;
-         }else{
-             return "redirect://localhost:8080/board";
-         }
+        boardService.Update(board);
 
+        return "redirect://localhost:8080/board";
     }
 
     // 글 상세보기
