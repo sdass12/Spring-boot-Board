@@ -71,7 +71,7 @@ public class MainController{
 
             return "redirect://localhost:8080/board";
         }else{
-            pw.println("<script type='text/javascript' charset='utf-8'>alert('비밀번호를 확인해주세요.'); history.back();</script>");
+            pw.println("<script type='text/javascript' charset='utf-8'>alert('Check your password please'); history.back();</script>");
             pw.flush();
         }
         return null;
