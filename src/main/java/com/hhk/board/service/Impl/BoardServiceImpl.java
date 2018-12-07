@@ -1,6 +1,7 @@
 package com.hhk.board.service.Impl;
 
 
+import com.hhk.board.domain.SearchVO;
 import com.hhk.board.repository.BoardRepository;
 import com.hhk.board.service.BoardService;
 import com.hhk.board.domain.BoardVO;
@@ -63,6 +64,19 @@ public class BoardServiceImpl implements BoardService {
 
         String PW = boardRepository.getPW(bno);
         return PW;
+    }
+
+    @Override
+    public List<SearchVO> search(SearchVO search){
+        String op = search.getOp();
+
+        if(op.equals("title")){
+            return boardRepository.t_search(search);
+        }else if(op.equals("content")){
+            return boardRepository.c_search(search);
+        }else{
+            return boardRepository.search(search);
+        }
     }
 
 

@@ -1,5 +1,6 @@
 package com.hhk.board.Controller;
 
+import com.hhk.board.domain.SearchVO;
 import com.hhk.board.service.BoardService;
 import com.hhk.board.domain.BoardVO;
 
@@ -99,6 +100,15 @@ public class MainController{
     @GetMapping("/write")
     public String writeForm(Model model){
         return "Write";
+    }
+
+    //글 검색
+    @PostMapping("/search")
+    public String search(SearchVO search){
+
+        List<SearchVO> searchList = BoardService.search(search);
+
+        return null;
     }
 
 

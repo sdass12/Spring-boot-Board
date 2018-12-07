@@ -3,6 +3,7 @@ package com.hhk.board.service;
 import java.util.List;
 
 import com.hhk.board.domain.BoardVO;
+import com.hhk.board.domain.SearchVO;
 
 public interface BoardService {
 
@@ -13,5 +14,6 @@ public interface BoardService {
     public void Update(BoardVO board); //글 수정
     public void Delete(int bno); //글 삭제
     public String getPW(int bno);
+    public List<SearchVO> search(SearchVO search);
 
 }

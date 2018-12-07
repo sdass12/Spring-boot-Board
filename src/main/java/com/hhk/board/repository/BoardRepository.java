@@ -2,6 +2,7 @@ package com.hhk.board.repository;
 
 
 import com.hhk.board.domain.BoardVO;
+import com.hhk.board.domain.SearchVO;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
@@ -55,4 +56,13 @@ public interface BoardRepository {
             "WHERE " +
             "bno = #{bno}")
     void Delete(@Param("bno") int bno);
+
+    @Select("SELECT * FROM board ORDER BY bno DESC") //조건문 바꿔야됨. 이거는 제목으로 검색하는거니 WHERE절에 like 이용해서 추가할것
+    List<SearchVO> t_search(SearchVO search);       //이거 말고도 c_search(내용 검색)과 search(내용,제목 검색)을 추가해야 됨. serviceImpl 참조할 것 (if문도 추가해야됨)
+
+    @Select("")
+    List<SearchVO> c_search(SearchVO search);
+
+    @Select("")
+    List<SearchVO> search(SearchVO search);
 }
