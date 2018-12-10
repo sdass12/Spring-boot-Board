@@ -6,8 +6,8 @@
 mysql - 8.0.13
  Schema - board
 table - board
-bno(INT 11),content(TEXT),title(VARCHAR 45),writer(VARCHAR 20),password(VARCHAR 26),date(DATE)
-bno-PK,NN,AI
+column - bno(INT 11),content(TEXT),title(VARCHAR 45),writer(VARCHAR 20),password(VARCHAR 26),date(DATE)
+         bno - PK,NN,AI
 content,title,writer,password - NN
 
  IntelliJ IDEA 2018.3 (Community Edition)
