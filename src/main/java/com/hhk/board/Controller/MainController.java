@@ -104,9 +104,21 @@ public class MainController{
     //글 검색
     @PostMapping("/search")
     public ModelAndView search(SearchVO search) throws Exception{
+
         ModelAndView S_List = new ModelAndView("S_List");
+        String op = search.getOp();
+        if(op.equals("title")){
+            op = "제목";
+        }else if(op.equals("content")){
+            op = "내용";
+        }else{
+            op = "제목+내용";
+        }
+
         S_List.addObject("board", boardService.search(search)); //검색 결과
         S_List.addObject("total",boardService.searchTotal(search)); //검색 결과 총 갯수
+        S_List.addObject("op",op);
+        S_List.addObject("s_con",search.getS_con());
 
         return S_List;
     }
