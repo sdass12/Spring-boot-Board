@@ -57,12 +57,21 @@ public interface BoardRepository {
             "bno = #{bno}")
     void Delete(@Param("bno") int bno);
 
-    @Select("SELECT * FROM board ORDER BY bno DESC") //조건문 바꿔야됨. 이거는 제목으로 검색하는거니 WHERE절에 like 이용해서 추가할것
-    List<SearchVO> t_search(SearchVO search);       //이거 말고도 c_search(내용 검색)과 search(내용,제목 검색)을 추가해야 됨. serviceImpl 참조할 것 (if문도 추가해야됨)
+    @Select("SELECT * FROM board WHERE title LIKE CONCAT('%',#{s_con},'%') ORDER BY bno DESC") //제목으로 검색
+    List<BoardVO> t_search(SearchVO search);
 
-    @Select("")
-    List<SearchVO> c_search(SearchVO search);
+    @Select("SELECT * FROM board WHERE content LIKE CONCAT('%',#{s_con},'%') ORDER BY bno DESC")
+    List<BoardVO> c_search(SearchVO search);
 
-    @Select("")
-    List<SearchVO> search(SearchVO search);
+    @Select("SELECT * FROM board WHERE title LIKE CONCAT('%',#{s_con},'%') OR content LIKE CONCAT('%',#{s_con},'%') ORDER BY bno DESC")
+    List<BoardVO> search(SearchVO search);
+
+    @Select("SELECT COUNT(*) FROM board WHERE title LIKE CONCAT('%',#{s_con},'%')")
+    int t_searchTotal(SearchVO search);
+
+    @Select("SELECT COUNT(*) FROM board WHERE content LIKE CONCAT('%',#{s_con},'%')")
+    int c_searchTotal(SearchVO search);
+
+    @Select("SELECT COUNT(*) FROM board WHERE title LIKE CONCAT('%',#{s_con},'%') OR content LIKE CONCAT('%',#{s_con},'%')")
+    int searchTotal(SearchVO search);
 }

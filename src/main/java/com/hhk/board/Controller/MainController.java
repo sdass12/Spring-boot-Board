@@ -27,11 +27,10 @@ public class MainController{
     // 글 리스트
     @GetMapping(value = {"/board","/"})
     public ModelAndView list() throws Exception{
-        int total = boardService.boardTotal();
-        List<BoardVO> boardList = boardService.List();
+
         ModelAndView List = new ModelAndView("List");
-        List.addObject("resultList", boardList); //게시글 정보(제목,내용,작성자,날짜 등)
-        List.addObject("total",total);//총 게시글 갯수
+        List.addObject("resultList", boardService.List()); //게시글 정보(제목,내용,작성자,날짜 등)
+        List.addObject("total", boardService.boardTotal());//총 게시글 갯수
 
         return List;
     }
@@ -104,11 +103,12 @@ public class MainController{
 
     //글 검색
     @PostMapping("/search")
-    public String search(SearchVO search){
+    public ModelAndView search(SearchVO search) throws Exception{
+        ModelAndView S_List = new ModelAndView("S_List");
+        S_List.addObject("board", boardService.search(search)); //검색 결과
+        S_List.addObject("total",boardService.searchTotal(search)); //검색 결과 총 갯수
 
-        List<SearchVO> searchList = BoardService.search(search);
-
-        return null;
+        return S_List;
     }
 
 

@@ -67,16 +67,40 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public List<SearchVO> search(SearchVO search){
+    public List<BoardVO> search(SearchVO search){
+
         String op = search.getOp();
 
         if(op.equals("title")){
-            return boardRepository.t_search(search);
+            List<BoardVO> s_result = boardRepository.t_search(search);
+
+            if(s_result==null){
+
+            }
+            return s_result;
         }else if(op.equals("content")){
             return boardRepository.c_search(search);
         }else{
             return boardRepository.search(search);
         }
+    }
+
+    @Override
+    public int searchTotal(SearchVO search){
+
+        String op = search.getOp();
+        int s_total=0;
+
+        if(op.equals("title")) {
+            s_total = boardRepository.t_searchTotal(search);
+        }else if(op.equals("content")){
+            s_total = boardRepository.c_searchTotal(search);
+        }else{
+            s_total = boardRepository.searchTotal(search);
+        }
+
+
+        return s_total;
     }
 
 
