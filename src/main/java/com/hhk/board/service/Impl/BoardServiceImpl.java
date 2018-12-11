@@ -1,6 +1,7 @@
 package com.hhk.board.service.Impl;
 
 
+import com.hhk.board.domain.Pagination;
 import com.hhk.board.domain.SearchVO;
 import com.hhk.board.repository.BoardRepository;
 import com.hhk.board.service.BoardService;
@@ -8,7 +9,6 @@ import com.hhk.board.domain.BoardVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.servlet.ModelAndView;
 
 
 import java.util.List;
@@ -23,9 +23,12 @@ public class BoardServiceImpl implements BoardService {
 
 
     @Override
-    public List<BoardVO> List(){
+    public List<BoardVO> List(int nowPage){
+        Pagination pager = new Pagination();
 
-       return boardRepository.List();
+        pager.setNowPage(nowPage);
+
+        return  boardRepository.List(pager);
     }
 
     @Override
@@ -102,6 +105,7 @@ public class BoardServiceImpl implements BoardService {
 
         return s_total;
     }
+
 
 
 

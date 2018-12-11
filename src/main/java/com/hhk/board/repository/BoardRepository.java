@@ -2,6 +2,7 @@ package com.hhk.board.repository;
 
 
 import com.hhk.board.domain.BoardVO;
+import com.hhk.board.domain.Pagination;
 import com.hhk.board.domain.SearchVO;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
@@ -10,10 +11,10 @@ import java.util.List;
 
 @Mapper
 @Repository
-public interface BoardRepository {
+public interface BoardRepository{
 
-    @Select("SELECT * FROM board ORDER BY bno DESC")
-    List<BoardVO> List();
+    @Select("SELECT * FROM board ORDER BY bno DESC LIMIT #{startPage}, 10")
+    List<BoardVO> List(Pagination pager);
 
     @Select("SELECT * FROM board WHERE bno=#{bno}")
     BoardVO View(@Param("bno") int bno);

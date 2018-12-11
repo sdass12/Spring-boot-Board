@@ -1,5 +1,6 @@
 package com.hhk.board.Controller;
 
+import com.hhk.board.domain.Pagination;
 import com.hhk.board.domain.SearchVO;
 import com.hhk.board.service.BoardService;
 import com.hhk.board.domain.BoardVO;
@@ -14,7 +15,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.PrintWriter;
-import java.util.List;
 
 @Controller
 public class MainController{
@@ -25,12 +25,19 @@ public class MainController{
     private BoardService boardService;
 
     // 글 리스트
-    @GetMapping(value = {"/board","/"})
-    public ModelAndView list() throws Exception{
+    @GetMapping(value = {"/board/{nowPage}","/{nowPage}"})
+    public ModelAndView list(@PathVariable("nowPage")int nowPage) throws Exception{
+        Pagination pager = new Pagination();
+
+        int total = boardService.boardTotal();
+
+        pager.setTotalBlock(total);
+        pager.setTotalPage(total);
 
         ModelAndView List = new ModelAndView("List");
-        List.addObject("resultList", boardService.List()); //게시글 정보(제목,내용,작성자,날짜 등)
-        List.addObject("total", boardService.boardTotal());//총 게시글 갯수
+        List.addObject("resultList", boardService.List(nowPage)); //게시글 정보(제목,내용,작성자,날짜 등)
+        List.addObject("pager", pager);
+        List.addObject("total", total);
 
         return List;
     }
@@ -41,7 +48,7 @@ public class MainController{
         logger.info("POST /board : " + board.toString());
         boardService.Write(board);
 
-            return "redirect://localhost:8080/board";
+            return "redirect://localhost:8080/board/1";
 
     }
 
@@ -96,7 +103,7 @@ public class MainController{
         return "redirect://localhost:8080/board";
     }
     //글 쓰기 페이지 이동
-    @GetMapping("/write")
+    @GetMapping(value = {"/write","/board/write"})
     public String writeForm(Model model){
         return "Write";
     }

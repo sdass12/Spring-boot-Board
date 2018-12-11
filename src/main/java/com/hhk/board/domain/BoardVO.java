@@ -2,8 +2,16 @@ package com.hhk.board.domain;
 
 import lombok.Data;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 @Data
+@Entity
 public class BoardVO {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
 
     private int bno;
     private int total;
