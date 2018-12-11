@@ -31,11 +31,8 @@ public class MainController{
 
         int total = boardService.boardTotal();
 
-        pager.setTotalBlock(total);
-        pager.setTotalPage(total);
-
         ModelAndView List = new ModelAndView("List");
-        List.addObject("resultList", boardService.List(nowPage)); //게시글 정보(제목,내용,작성자,날짜 등)
+        List.addObject("resultList", boardService.List(nowPage,total)); //게시글 정보(제목,내용,작성자,날짜 등)
         List.addObject("pager", pager);
         List.addObject("total", total);
 

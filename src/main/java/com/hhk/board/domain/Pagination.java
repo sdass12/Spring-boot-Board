@@ -1,5 +1,6 @@
 package com.hhk.board.domain;
 
+
 public class Pagination {
     private int nowPage=1; //현재 페이지 기본 값은 1
     private int totalPage; //모든 페이지
@@ -12,7 +13,7 @@ public class Pagination {
     }
 
     public void setTotalBlock(int totalPage) {
-        this.totalBlock = (int) Math.ceil(totalPage/5);
+        this.totalBlock = (int) (Math.ceil(totalPage/5));
     }
 
     public int getStartPage() {
@@ -29,7 +30,7 @@ public class Pagination {
     }
 
     public void setNowBlock(int nowPage) {
-        this.nowBlock = (int) Math.ceil(nowPage/5);
+        this.nowBlock = (int) (Math.ceil(nowPage/5));
     }
 
     public int getTotalPage() {
@@ -37,7 +38,7 @@ public class Pagination {
     }
 
     public void setTotalPage(int total) {
-        this.totalPage = (int) Math.ceil(total/10);
+        this.totalPage = (int) (Math.ceil(total/10));
     }
 
     public int getNowPage() {
@@ -45,7 +46,7 @@ public class Pagination {
     }
 
     public void setNowPage(int nowPage) {
-        if(nowPage>this.getTotalPage() || nowPage<1){ //현재 페이지가 전체 페이지보다 크거나 0페이지보다 작을 경우 첫 번째 페이지로 바꿈
+        if(nowPage>this.totalPage || nowPage<1){ //현재 페이지가 전체 페이지보다 크거나 0페이지보다 작을 경우 첫 번째 페이지로 바꿈
             nowPage=1;
         }
 

@@ -23,11 +23,13 @@ public class BoardServiceImpl implements BoardService {
 
 
     @Override
-    public List<BoardVO> List(int nowPage){
+    public List<BoardVO> List(int nowPage,int total){
         Pagination pager = new Pagination();
 
-        pager.setNowPage(nowPage);
 
+        pager.setTotalPage(total);
+        pager.setTotalBlock(total);
+        pager.setNowPage(nowPage);
         return  boardRepository.List(pager);
     }
 
