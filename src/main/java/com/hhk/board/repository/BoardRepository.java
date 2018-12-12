@@ -58,14 +58,14 @@ public interface BoardRepository{
             "bno = #{bno}")
     void Delete(@Param("bno") int bno);
 
-    @Select("SELECT * FROM board WHERE title LIKE CONCAT('%',#{s_con},'%') ORDER BY bno DESC") //제목으로 검색
-    List<BoardVO> t_search(SearchVO search);
+    @Select("SELECT * FROM board WHERE title LIKE CONCAT('%',#{search.s_con},'%') ORDER BY bno DESC LIMIT #{pager.startPage}, 10") //제목으로 검색
+    List<BoardVO> t_search(SearchVO search,Pagination pager);
 
-    @Select("SELECT * FROM board WHERE content LIKE CONCAT('%',#{s_con},'%') ORDER BY bno DESC")
-    List<BoardVO> c_search(SearchVO search);
+    @Select("SELECT * FROM board WHERE content LIKE CONCAT('%',#{search.s_con},'%') ORDER BY bno DESC LIMIT #{pager.startPage}, 10")
+    List<BoardVO> c_search(SearchVO search, Pagination pager);
 
-    @Select("SELECT * FROM board WHERE title LIKE CONCAT('%',#{s_con},'%') OR content LIKE CONCAT('%',#{s_con},'%') ORDER BY bno DESC")
-    List<BoardVO> search(SearchVO search);
+    @Select("SELECT * FROM board WHERE title LIKE CONCAT('%',#{search.s_con},'%') OR content LIKE CONCAT('%',#{search.s_con},'%') ORDER BY bno DESC LIMIT #{pager.startPage}, 10")
+    List<BoardVO> search(SearchVO search, Pagination pager);
 
     @Select("SELECT COUNT(*) FROM board WHERE title LIKE CONCAT('%',#{s_con},'%')")
     int t_searchTotal(SearchVO search);

@@ -14,7 +14,7 @@ public interface BoardService {
     public void Update(BoardVO board); //글 수정
     public void Delete(int bno); //글 삭제
     public String getPW(int bno); //글 수정을 할 때 비밀번호 조회에 사용
-    public List<BoardVO> search(SearchVO search); //글 검색
+    public List<BoardVO> search(SearchVO search,int nowPage,int total); //글 검색
     public int searchTotal(SearchVO search);
 
 

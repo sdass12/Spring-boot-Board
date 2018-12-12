@@ -38,7 +38,8 @@ public class Pagination {
     }
 
     public void setTotalPage(int total) {
-        this.totalPage = (int) (Math.ceil(total/10));
+        double total2=(double)total;
+        this.totalPage =(int) Math.ceil(total2/10);
     }
 
     public int getNowPage() {
@@ -46,8 +47,10 @@ public class Pagination {
     }
 
     public void setNowPage(int nowPage) {
-        if(nowPage>this.totalPage || nowPage<1){ //현재 페이지가 전체 페이지보다 크거나 0페이지보다 작을 경우 첫 번째 페이지로 바꿈
+        if(nowPage<1){ //현재 페이지가 전체 페이지보다 크거나 0페이지보다 작을 경우 첫 번째 페이지로 바꿈
             nowPage=1;
+        }else if(nowPage>this.totalPage){
+            nowPage=this.totalPage;
         }
 
         this.setStartPage(nowPage);

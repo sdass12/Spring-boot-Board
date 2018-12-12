@@ -49,11 +49,56 @@
         </tbody>
         <tfoot>
             <tr>
-                <td colspan="4"><input type="button" value="메인으로" onClick="location.href='board'" align="right" class="btn btn-success"></td>
+                <td colspan="4"><input type="button" value="메인으로" onClick="location.href='/1'" align="right" class="btn btn-success"></td>
             </tr>
         </tfoot>
     </table>
 </div>
+<!--여기부터 페이징-->
+<div align="center">
+    <table align="0">
+        <tr>
+            <td width="30">
+                <form th:action="@{/search/1}" method="post"> <!--1페이지로 돌아가기(Controller 에서 POST 로 받기 때문에 GET 방식으로 보내면 에러가 남)-->
+                    <input type="hidden" name="op" th:value="${op}">
+                    <input type="hidden" name="s_con" th:value="${s_con}">
+                    <a href="#" onclick="this.parentNode.submit()"><<</a>
+                </form>
+            </td>
+            <td width="30">
+                <form th:action="@{'/search/'+${pager.nowPage-1}}" method="post"> <!-- 1페이지 전으로 돌아가기-->
 
+                    <input type="hidden" name="op" th:value="${op}">
+                    <input type="hidden" name="s_con" th:value="${s_con}">
+
+                    <a href="#" onclick="this.parentNode.submit()"><</a>
+                </form>
+            </td>
+    <!--<a th:href="'/search/'+${pager.nowPage-1}"><</a>-->
+            <td width="30">
+                <form th:action="@{'/search/'+${pager.nowPage+1}}" method="post">  <!-- 1페이지 후로 가기-->
+
+                    <input type="hidden" name="op" th:value="${op}">
+                    <input type="hidden" name="s_con" th:value="${s_con}">
+
+                    <a href="#" onclick="this.parentNode.submit()">></a>
+                </form>
+            </td>
+            <td width="30">
+    <!--<a th:href="'/search/'+${pager.nowPage+1}">></a> -->
+                <form th:action="@{'/search/'+${pager.totalPage}}" method="post"> <!-- 마지막 페이지로 가기-->
+
+                    <input type="hidden" name="op" th:value="${op}">
+                    <input type="hidden" name="s_con" th:value="${s_con}">
+
+                    <a href="#" onclick="this.parentNode.submit()">>></a>
+                </form>
+            </td>
+        </tr>
+    </table>
+    <!--<a th:href="'/search/'+${pager.totalPage}">>></a>-->
+    <br>
+    <p th:text="'현재 페이지 : '+${pager.nowPage}+' / '+${pager.totalPage}  ">...</p>
+</div>
 </body>
 </html>

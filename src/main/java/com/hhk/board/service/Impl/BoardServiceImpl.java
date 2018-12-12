@@ -25,11 +25,11 @@ public class BoardServiceImpl implements BoardService {
     @Override
     public List<BoardVO> List(int nowPage,int total){
         Pagination pager = new Pagination();
+        pager.setTotalPage(total);  //총 페이지수를 정해준다.
+        pager.setTotalBlock(total); //총 블럭수를 정해준다.
+        pager.setNowPage(nowPage); //현재 페이지를 정해 준 후 총 페이지와 현재 페이지를 이용해 스타트 페이지를 정해준다.(setNowPage 안에 setStartPage 가 있음)
 
 
-        pager.setTotalPage(total);
-        pager.setTotalBlock(total);
-        pager.setNowPage(nowPage);
         return  boardRepository.List(pager);
     }
 
@@ -72,21 +72,26 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public List<BoardVO> search(SearchVO search){
+    public List<BoardVO> search(SearchVO search,int nowPage,int total){
+        Pagination pager = new Pagination();
+
+        pager.setTotalPage(total);  //총 페이지수를 정해준다.
+        pager.setTotalBlock(total); //총 블럭수를 정해준다.
+        pager.setNowPage(nowPage); //현재 페이지를 정해 준 후 총 페이지와 현재 페이지를 이용해 스타트 페이지를 정해준다.(setNowPage 안에 setStartPage 가 있음)
 
         String op = search.getOp();
 
         if(op.equals("title")){
-            List<BoardVO> s_result = boardRepository.t_search(search);
+            List<BoardVO> s_result = boardRepository.t_search(search,pager);
 
             if(s_result==null){
 
             }
             return s_result;
         }else if(op.equals("content")){
-            return boardRepository.c_search(search);
+            return boardRepository.c_search(search,pager);
         }else{
-            return boardRepository.search(search);
+            return boardRepository.search(search,pager);
         }
     }
 
@@ -95,6 +100,7 @@ public class BoardServiceImpl implements BoardService {
 
         String op = search.getOp();
         int s_total=0;
+
 
         if(op.equals("title")) {
             s_total = boardRepository.t_searchTotal(search);
