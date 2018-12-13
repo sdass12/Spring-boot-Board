@@ -7,7 +7,7 @@ import com.hhk.board.domain.SearchVO;
 
 public interface BoardService {
 
-    public List<BoardVO> List(int nowPage,int total); //인덱스 페이지 리스트 출력
+    public List<BoardVO> List(int nowPage,int total,int nowBlock); //인덱스 페이지 리스트 출력
     public int boardTotal();
     public BoardVO View(int bno); //글 상세보기
     public void Write(BoardVO board); //글 쓰기
@@ -16,6 +16,7 @@ public interface BoardService {
     public String getPW(int bno); //글 수정을 할 때 비밀번호 조회에 사용
     public List<BoardVO> search(SearchVO search,int nowPage,int total); //글 검색
     public int searchTotal(SearchVO search);
+    public List<Object> getBlockPage(int nowBlock, int totalPage);
 
 
 }

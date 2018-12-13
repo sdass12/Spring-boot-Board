@@ -13,7 +13,8 @@ public class Pagination {
     }
 
     public void setTotalBlock(int totalPage) {
-        this.totalBlock = (int) (Math.ceil(totalPage/5));
+        double totalPage2 = (double)totalPage;
+        this.totalBlock = (int) Math.ceil(totalPage2/10/5);
     }
 
     public int getStartPage() {
@@ -29,17 +30,17 @@ public class Pagination {
         return nowBlock;
     }
 
-    public void setNowBlock(int nowPage) {
-        this.nowBlock = (int) (Math.ceil(nowPage/5));
+    public void setNowBlock(int nowBlock) {
+        this.nowBlock = nowBlock;
     }
 
     public int getTotalPage() {
         return totalPage;
     }
 
-    public void setTotalPage(int total) {
-        double total2=(double)total;
-        this.totalPage =(int) Math.ceil(total2/10);
+    public void setTotalPage(int totalPage) {
+        double totalPage2 = (double)totalPage;
+        this.totalPage =(int) Math.ceil(totalPage2/10);
     }
 
     public int getNowPage() {

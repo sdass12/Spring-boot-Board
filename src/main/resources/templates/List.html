@@ -20,7 +20,7 @@
     <div>
         <p th:text="'총 게시물 : '+${total}+'개'" align="center">...</p>
         <div align="center">
-            <form th:action="@{/search/1}" method="post" name="search">
+            <form th:action="@{/search/1/1}" method="post" name="search">
                 <SELECT name="op" style='height:25px; width: 100px;'>
                     <OPTION value='title'>제목</OPTION>
                     <OPTION value='content'>내용</OPTION>
@@ -56,11 +56,13 @@
     </div>
     <!--여기부터 페이징-->
     <div align="center">
-        <a th:href="'/1'"><<</a> &nbsp;&nbsp; <!--1페이지로 돌아가기-->
-        <a th:href="'/'+${pager.nowPage-1}"><</a> <!--1페이지 전으로 돌아가기-->
-        &nbsp;&nbsp;
-        <a th:href="'/'+${pager.nowPage+1}">></a> &nbsp;&nbsp; <!--1페이지 후로 가기-->
-        <a th:href="'/'+${pager.totalPage}">>></a> <!--마지막 페이지로 가기-->
+        <a th:href="'/1/1'"><<</a> &nbsp;&nbsp; <!--1페이지로 돌아가기-->
+        <a th:href="'/'+${pager.nowPage-1}+'/'+${pager.nowBlock}"><</a> <!--1페이지 전으로 돌아가기-->
+        &nbsp;  <div th:each="blockPage : ${blockPage}" class="pagination">
+                    <a th:href="'/'+${blockPage}+'/'+${pager.nowBlock}" th:text="${blockPage}">...!</a>&nbsp;
+                </div>    &nbsp;
+        <a th:href="'/'+${pager.nowPage+1}+'/'+${nowBlock}">></a> &nbsp;&nbsp; <!--1페이지 후로 가기-->
+        <a th:href="'/'+${pager.totalPage}+'/'+${pager.totalBlock}">>></a> <!--마지막 페이지로 가기-->
         <br>
         <p th:text="'현재 페이지 : '+${pager.nowPage}+' / '+${pager.totalPage}  ">...</p>
     </div>

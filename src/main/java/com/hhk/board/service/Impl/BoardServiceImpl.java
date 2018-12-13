@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -23,10 +25,11 @@ public class BoardServiceImpl implements BoardService {
 
 
     @Override
-    public List<BoardVO> List(int nowPage,int total){
+    public List<BoardVO> List(int nowPage,int total,int nowBlock){
         Pagination pager = new Pagination();
         pager.setTotalPage(total);  //총 페이지수를 정해준다.
         pager.setTotalBlock(total); //총 블럭수를 정해준다.
+        pager.setNowBlock(nowBlock);
         pager.setNowPage(nowPage); //현재 페이지를 정해 준 후 총 페이지와 현재 페이지를 이용해 스타트 페이지를 정해준다.(setNowPage 안에 setStartPage 가 있음)
 
 
@@ -114,7 +117,21 @@ public class BoardServiceImpl implements BoardService {
         return s_total;
     }
 
+    public List<Object> getBlockPage(int nowBlock,int totalPage){
+        List<Object> BlockPage = new ArrayList<Object>();
 
+
+
+        for(int i=(nowBlock-1)*5+1; i<=nowBlock*5; i++){
+            if(i>totalPage){
+                break;
+            }
+            BlockPage.add(i);
+
+        }
+        return BlockPage;
+
+    }
 
 
 }
