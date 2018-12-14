@@ -90,7 +90,7 @@ public class MainController{
         logger.info("POST /board : " + board.toString());
         boardService.Write(board);
 
-            return "redirect://localhost:8080/board";
+            return "redirect://localhost:8080/";
 
     }
 
@@ -98,7 +98,8 @@ public class MainController{
     @GetMapping("/update/{bno}")
     public ModelAndView update(@PathVariable("bno")int bno) throws Exception{
         ModelAndView Update = new ModelAndView("Update");
-        Update.addObject("board", boardService.View(bno));
+        Update.addObject("board1111" +
+                "", boardService.View(bno));
 
         return Update;
     }
@@ -115,12 +116,12 @@ public class MainController{
 
         PrintWriter pw = httpServletResponse.getWriter();
 
-        if(u_pw.equals(db_pw)){
+        if(u_pw.equals(db_pw)){ //글 수정페이지에서 사용자가 입력한 비밀번호와 DB에 넣어놨던(글 작성 당시) 비밀번호를 비교해서 같다면 업데이트를 시킴.
             boardService.Update(board);
 
-            return "redirect://localhost:8080/board";
-        }else{
-            pw.println("<script type='text/javascript' charset='utf-8'>alert('Check your password please'); history.back();</script>");
+            return "redirect://localhost:8080/";
+        }else{  //비밀번호가 다르다면 알람을 띄우고 수정페이지로 돌려보냄.
+            pw.println("<script type='text/javascript'>alert('Check your password please'); history.back();</script>");
             pw.flush();
         }
         return null;
