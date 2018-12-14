@@ -145,25 +145,6 @@ public class BoardServiceImpl implements BoardService {
         return S_List;
     }
 
-    @Override
-    public int searchTotal(SearchVO search){
-
-        String op = search.getOp();
-        int s_total=0;
-
-
-        if(op.equals("title")) {
-            s_total = boardRepository.t_searchTotal(search);
-        }else if(op.equals("content")){
-            s_total = boardRepository.c_searchTotal(search);
-        }else{
-            s_total = boardRepository.searchTotal(search);
-        }
-
-
-        return s_total;
-    }
-
     public List<Object> getBlockPage(int nowBlock,int totalPage){
         List<Object> BlockPage = new ArrayList<Object>();
 
