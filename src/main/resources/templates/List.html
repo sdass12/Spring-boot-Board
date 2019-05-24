@@ -18,6 +18,7 @@
 <body>
 <div>
     <p th:text="'총 게시물 : '+${total}+'개'" align="center">...</p>
+    <div align="right"><a th:href="@{/login}"><button class="btn btn-success">로그인/회원가입</button> </a>&emsp;&emsp;&emsp;</div>
     <div align="center">
         <form th:action="@{/search/1/1}" method="post" name="search">
             <SELECT name="op" style="height:25px; width: 100px;">

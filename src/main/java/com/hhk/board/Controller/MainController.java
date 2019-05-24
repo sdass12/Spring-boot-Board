@@ -111,4 +111,12 @@ public class MainController{
         return boardService.search(search,nowPage,nowBlock);
     }
 
+    //로그인 페이지
+    @GetMapping(value = {"/login", "/board/login"})
+    public String loginForm(Model model){return "Login";}
+
+    //회원가입 페이지
+    @GetMapping(value = {"/register", "/board/register"})
+    public String registerForm(Model model){return "Register";}
+
 }
