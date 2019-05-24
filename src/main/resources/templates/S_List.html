@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>게시판</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/bootstrap.css}"/>
+    <script type="text/javascript">
+        function Check(){
+            var form = document.search;
+            if(s_con.value==""||s_con.value==null){
+                alert("검색어를 입력해 주세요.");
+            }else{
+                form.submit();
+            }
+        }
+    </script>
+</head>
+<body>
+<div>
+    <p align="center" th:text="'\''+${op}+'\'으로\''+${s_con}+'\'을(를) 검색했을 때 총 '+${total}+'개가 검색됐습니다.'">...</p>
+    <div align="center">
+        <form th:action="@{/search/1/1}" method="post" name="search">
+            <SELECT name="op" style='height:25px; width: 100px;'>
+                <OPTION value='title'>제목</OPTION>
+                <OPTION value='content'>내용</OPTION>
+                <OPTION value='title_content'>제목+내용</OPTION>
+            </SELECT>
+            <input type="text" name="s_con" id="s_con">
+            <input type="button" onClick="Check()" th:value="Search" class="btn">
+        </form>
+    </div>
+    <table border="1" align="center" class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <td width="50" align="center" >Num</td>
+                <td width="600" align="center">Title</td>
+                <td width="100" align="center">Writer</td>
+                <td width="150" align="center">Date</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each ="board : ${board}">
+                <td th:text="${board.bno}" align="center">...</td>
+                <td align="center"><a th:href="'/view/'+${board.bno}" th:text="${board.title}" style="text-decoration:none;color:black">...</a></td>
+                <td th:utext="${board.writer}" align="center">...</td>
+                <td th:utext="${board.date}" align="center">...</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="4" align="center"><input type="button" value="메인으로" onClick="location.href='/1/1'" align="right" class="btn btn-success"></td>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+<!--여기부터 페이징-->
+<div align="center">
+    <table align="0">
+        <tr>
+            <td width="30">
+                <form th:action="@{/search/1/1}" method="post"> <!--1페이지로 돌아가기(Controller 에서 POST 로 받기 때문에 GET 방식으로 보내면 에러가 남)-->
+                    <input type="hidden" name="op" th:value="${op}">
+                    <input type="hidden" name="s_con" th:value="${s_con}">
+                    <a href="#" onclick="this.parentNode.submit()"><<</a>
+                </form>
+            </td>
+            <td width="30">
+                <form th:action="@{'/search/'+${pager.nowPage-1}+'/'+${pager.nowBlock}}" method="post"> <!-- 1페이지 전으로 돌아가기-->
+
+                    <input type="hidden" name="op" th:value="${op}">
+                    <input type="hidden" name="s_con" th:value="${s_con}">
+
+                    <a href="#" onclick="this.parentNode.submit()"><</a>
+                </form>
+            </td>
+            <td width="20" th:each="blockPage : ${blockPage}">
+                <form th:action="'/search/'+${blockPage}+'/'+${pager.nowBlock}" method="post">
+
+                    <input type="hidden" name="op" th:value="${op}">
+                    <input type="hidden" name="s_con" th:value="${s_con}">
+                    <a href="#" onclick="this.parentNode.submit()" th:text="${blockPage}">...</a>
+                </form>
+            </td>
+            <td width="30">
+                <form th:action="@{'/search/'+${pager.nowPage+1}+'/'+${pager.nowBlock}}" method="post">  <!-- 1페이지 후로 가기-->
+
+                    <input type="hidden" name="op" th:value="${op}">
+                    <input type="hidden" name="s_con" th:value="${s_con}">
+
+                    <a href="#" onclick="this.parentNode.submit()">></a>
+                </form>
+            </td>
+            <td width="30">
+                <form th:action="@{'/search/'+${pager.totalPage}+'/'+${pager.nowBlock}}" method="post"> <!-- 마지막 페이지로 가기-->
+
+                    <input type="hidden" name="op" th:value="${op}">
+                    <input type="hidden" name="s_con" th:value="${s_con}">
+
+                    <a href="#" onclick="this.parentNode.submit()">>></a>
+                </form>
+            </td>
+        </tr>
+    </table>
+    <br>
+    <p th:text="'현재 페이지 : '+${pager.nowPage}+' / '+${pager.totalPage}  ">...</p>
+</div>
+</body>
+</html>

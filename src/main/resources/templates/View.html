@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>게시판</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/bootstrap.css}"/>
+
+    <script type="text/javascript">
+
+        function CheckPW(){
+
+            var pw= prompt("Please enter Password","");
+            var u_pw=document.getElementById("u_password").value;
+
+            var form=document.delete;
+
+            if(pw==u_pw){
+                form.submit();
+            }else{
+                alert("패스워드를 제대로 입력해 주세요.");
+            }
+        }
+
+    </script>
+</head>
+<body>
+    <div>
+        <table border="1" align="center" class="table table-striped table-hover">
+            <tr>
+                <td width="60" align="center">제목</td>
+                <td th:text="${board.title}" width="500" colspan="3">...</td>
+            </tr>
+            <tr>
+                <td width="60" align="center">작성자</td>
+                <td width="200" th:text="${board.writer}" align="center">...</td>
+                <td width="60" align="center">글번호</td>
+                <td width="180" th:text="${board.bno}" align="center">...</td>
+            </tr>
+            <tr>
+                <td width="560" height="600" colspan="4" th:text="${board.content}" align="center">...</td>
+            </tr>
+            <tr>
+                <form th:action="'/delete/'+${bno}" method="POST" name="delete">
+                    <td width="187" align="center"><button type="button" th:text="삭제" onClick="location.href='javascript:CheckPW();'" class="btn btn-success" ></button></td>
+                </form>
+                <form th:action="'/update/'+${bno}" method="GET">
+                <td width="186" align="center"><input type="submit" value="수정" class="btn btn-success"></td>
+                </form>
+                <td width="187" colspan="2" align="center"><input type="button" value="목록" onClick="history.back()" class="btn btn-success"></td>
+            </tr>
+        </table>
+        <input type="hidden" id="u_password" th:value="${board.password}">
+    </div>
+</body>
+</html>
